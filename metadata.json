@@ -1,0 +1,5 @@
+{
+  "name": "Transcriber AI",
+  "description": "Transformez vos vidéos en transcriptions, traductions et documents exportables automatiquement avec l'IA.",
+  "requestFramePermissions": ["camera"]
+}

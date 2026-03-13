@@ -1,0 +1,5 @@
+{
+	"appId": "com.videotranscriber.app",
+	"appName": "VideoTranscriber",
+	"webDir": "dist"
+}

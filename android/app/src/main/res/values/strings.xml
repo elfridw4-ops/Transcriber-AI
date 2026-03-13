@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">VideoTranscriber</string>
+    <string name="title_activity_main">VideoTranscriber</string>
+    <string name="package_name">com.videotranscriber.app</string>
+    <string name="custom_url_scheme">com.videotranscriber.app</string>
+</resources>

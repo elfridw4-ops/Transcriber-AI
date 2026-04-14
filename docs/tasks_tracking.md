@@ -11,6 +11,10 @@
 - [x] Fix erreur DOM `insertBefore` - 2026-03-13 - Ajout de `translate="no"` et clés React
 - [x] Création du système de documentation - 2026-04-14 - Fichiers Markdown générés
 - [x] Implémentation ErrorBoundary et permissions Caméra - 2026-04-14 - Prévention des crashs UI et support mobile natif
+- [x] Harmonisation SEO et Branding - 2026-04-14 - Intégration Aurion Labs-G et balises meta
+- [x] Configuration de production - 2026-04-14 - Scripts npm et Dockerfile créés
+- [x] Fix erreur JSON en production - 2026-04-14 - Ajout d'un Global Error Handler Express
+- [x] Intégration FFmpeg autonome - 2026-04-14 - Utilisation de `@ffmpeg-installer/ffmpeg`
 
 # 🐛 Bugs
 | Priorité | Description | Statut | Assigné |

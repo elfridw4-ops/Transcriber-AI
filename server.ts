@@ -3,11 +3,15 @@ import { createServer as createViteServer } from "vite";
 import path from "path";
 import multer from "multer";
 import ffmpeg from "fluent-ffmpeg";
+import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
 import fs from "fs";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from "docx";
 import PDFDocument from "pdfkit";
 import { GoogleGenAI } from "@google/genai";
 import cors from "cors";
+
+// Configuration de FFmpeg avec le binaire autonome
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 // Configuration de Multer pour le stockage temporaire
 const storage = multer.diskStorage({
@@ -62,7 +66,7 @@ async function startServer() {
           .on("end", resolve)
           .on("error", (err) => {
             console.error("FFmpeg Error:", err);
-            reject(new Error("Échec de l'extraction audio."));
+            reject(new Error(`Échec de l'extraction audio: ${err.message}`));
           })
           .save(audioPath);
       });
@@ -187,6 +191,16 @@ async function startServer() {
   // Catch-all pour les routes API non trouvées
   app.all("/api/*", (req, res) => {
     res.status(404).json({ error: `Route API non trouvée : ${req.method} ${req.url}` });
+  });
+
+  // Global error handler pour Express (évite les pages HTML d'erreur)
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error("Global Express Error:", err);
+    if (req.path.startsWith('/api/')) {
+      res.status(500).json({ error: err.message || "Erreur interne du serveur" });
+    } else {
+      next(err);
+    }
   });
 
   // Vite middleware pour le développement

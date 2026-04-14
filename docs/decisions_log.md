@@ -69,3 +69,35 @@ Mettre en place un composant `ErrorBoundary` (basé sur les classes React) pour 
 ### Conséquences
 - ✅ Positives : Résilience accrue de l'application. Les utilisateurs voient désormais un message d'erreur clair avec un bouton de rechargement au lieu d'une page blanche.
 - 🔧 Actions requises : Typage strict des `props` et `state` du composant `ErrorBoundary` pour TypeScript.
+
+---
+
+## ADR-005 - Déploiement via Docker
+**Date** : 2026-04-14
+**Statut** : Accepté
+
+### Contexte
+L'application nécessite un environnement Node.js complet avec FFmpeg installé au niveau système pour fonctionner, ce qui rend impossible l'hébergement sur des plateformes statiques (Vercel, Netlify).
+
+### Décision
+Création d'un `Dockerfile` basé sur `node:20-alpine` installant explicitement FFmpeg (`apk add ffmpeg`) et exposant le port 3000.
+
+### Conséquences
+- ✅ Positives : Portabilité maximale, déploiement facilité sur Render, Railway ou tout VPS supportant Docker.
+- 🔧 Actions requises : Ajout d'un script `start` dans `package.json` pour lancer le serveur en production.
+
+---
+
+## ADR-006 - Intégration de FFmpeg autonome
+**Date** : 2026-04-14
+**Statut** : Accepté
+
+### Contexte
+L'environnement d'hébergement partagé (AI Studio) ne possède pas FFmpeg installé au niveau du système d'exploitation, provoquant l'échec de l'extraction audio.
+
+### Décision
+Utilisation du package npm `@ffmpeg-installer/ffmpeg` pour télécharger un binaire autonome de FFmpeg directement dans `node_modules` et configuration de `fluent-ffmpeg` pour utiliser ce chemin spécifique.
+
+### Conséquences
+- ✅ Positives : L'application devient 100% autonome et n'a plus besoin que FFmpeg soit pré-installé sur la machine hôte (sauf pour l'image Docker où il reste recommandé).
+- ⚠️ Risques : Augmentation de la taille du dossier `node_modules`.

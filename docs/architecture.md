@@ -9,12 +9,16 @@ projet/
 │   │                   # ❌ Impact si absent : Plus d'interface utilisateur
 │   ├── main.tsx        # ✔️ Pourquoi : Point d'entrée React avec ErrorBoundary
 │   └── index.css       # ✔️ Pourquoi : Styles globaux et configuration Tailwind
+├── public/
+│   └── icon.svg        # ✔️ Pourquoi : Logo officiel (Aurion Labs-G) pour PWA et favicon
 ├── server.ts           # ✔️ Pourquoi : Backend Cloud (Express, FFmpeg, Docx, PDFKit)
 │                       # 👥 Utilisé par : L'environnement Cloud Preview
 ├── main.py             # ✔️ Pourquoi : Backend Local (FastAPI, Whisper)
 │                       # 👥 Utilisé par : L'utilisateur en local
 ├── android/            # ✔️ Pourquoi : Projet natif généré par Capacitor pour l'APK
 ├── docs/               # ✔️ Pourquoi : Documentation complète du projet
+├── Dockerfile          # ✔️ Pourquoi : Recette de déploiement conteneurisé (Node + FFmpeg)
+├── .dockerignore       # ✔️ Pourquoi : Exclut les fichiers inutiles du conteneur
 └── package.json        # ✔️ Pourquoi : Dépendances et scripts de build
 ```
 
@@ -35,6 +39,7 @@ projet/
 |---------|---------|------|--------------|
 | `@google/genai` | ^1.29.0 | IA Cloud (Transcription/Traduction) | OpenAI API |
 | `fluent-ffmpeg` | ^2.1.3 | Extraction audio (Node.js) | ffmpeg.wasm |
+| `@ffmpeg-installer/ffmpeg` | ^1.1.0 | Binaire FFmpeg autonome | Installation système |
 | `docx` / `pdfkit` | latest | Génération de documents | pdfmake |
 | `@capacitor/core` | ^8.2.0 | Wrapper Mobile (Génération APK) | React Native |
 | `openai-whisper` | latest | IA Locale (Python) | Whisper.cpp |

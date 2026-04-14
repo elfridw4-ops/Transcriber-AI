@@ -48,6 +48,7 @@
 - **Ton** : Professionnel, Efficace, Accessible.
 - **Voix** : Directe et rassurante ("Vidéo vers Texte en un clic", "Succès !").
 - **Personnalité** : Moderne, Rapide, Fiable.
+- **Marque** : Transcriber AI is a product of Aurion Labs-G. All rights reserved by Aurion Labs-G.
 
 # Responsive
 - **Breakpoints** : `sm` (480px), `md` (768px), `lg` (1200px).

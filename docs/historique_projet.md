@@ -38,3 +38,7 @@
 | 2026-03-13 | Formatage entrelacé Word/PDF + Fix DOM | Lisibilité accrue, Stabilité React | Assistant |
 | 2026-04-14 | Création du système de documentation | Maintenabilité et Onboarding | Assistant |
 | 2026-04-14 | Ajout ErrorBoundary et permissions Caméra | Stabilité UI et accès natif mobile | Assistant |
+| 2026-04-14 | Harmonisation SEO et Branding (Aurion Labs-G) | Visibilité et conformité légale | Assistant |
+| 2026-04-14 | Création Dockerfile et scripts de production | Déploiement facilité | Assistant |
+| 2026-04-14 | Intégration FFmpeg autonome (@ffmpeg-installer) | Indépendance de l'environnement hôte | Assistant |
+| 2026-04-14 | Correction gestion d'erreur JSON (Express) | Débogage facilité en production | Assistant |

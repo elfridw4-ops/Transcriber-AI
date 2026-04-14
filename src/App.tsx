@@ -146,6 +146,13 @@ export default function App() {
           body: formData,
         });
 
+        const contentType = extractRes.headers.get("content-type");
+        if (!contentType || contentType.indexOf("application/json") === -1) {
+          const text = await extractRes.text();
+          console.error("Server HTML response:", text);
+          throw new Error(`Erreur serveur (${extractRes.status}) : Le backend n'a pas renvoyé de JSON. Détails: ${text.substring(0, 150)}...`);
+        }
+
         if (!extractRes.ok) {
           const errData = await extractRes.json();
           throw new Error(errData.error || "Échec de l'extraction audio.");
@@ -155,9 +162,9 @@ export default function App() {
         setProgress(40);
         setStatusMessage("Transcription par l'IA (Gemini)...");
 
-        const apiKey = (window as any).process?.env?.GEMINI_API_KEY || "";
+        const apiKey = process.env.GEMINI_API_KEY || "";
         if (!apiKey) {
-          console.warn("GEMINI_API_KEY non trouvée dans process.env");
+          console.warn("GEMINI_API_KEY non trouvée");
         }
         
         const ai = new GoogleGenAI({ apiKey });
@@ -210,6 +217,12 @@ export default function App() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ data: transcriptionData }),
         });
+
+        const genContentType = genRes.headers.get("content-type");
+        if (!genContentType || genContentType.indexOf("application/json") === -1) {
+          const text = await genRes.text();
+          throw new Error(`Erreur serveur (${genRes.status}) lors de la génération des documents. Détails: ${text.substring(0, 150)}...`);
+        }
 
         if (!genRes.ok) throw new Error("Échec de la génération des documents.");
         const { fileId } = await genRes.json();
@@ -497,9 +510,12 @@ export default function App() {
       </main>
 
       {/* Footer Mobile */}
-      <footer className="mt-auto py-8 border-t border-black/5 text-center">
-        <p className="text-[10px] font-bold text-black/20 uppercase tracking-[0.3em]">
-          Transcriber AI • Propulsé par Google Gemini
+      <footer className="mt-auto py-8 border-t border-black/5 text-center space-y-2">
+        <p className="text-[10px] font-bold text-black/30 uppercase tracking-[0.2em]">
+          Transcriber AI is a product of Aurion Labs-G
+        </p>
+        <p className="text-[9px] font-medium text-black/20 uppercase tracking-[0.1em]">
+          All rights reserved by Aurion Labs-G © 2026
         </p>
       </footer>
 
